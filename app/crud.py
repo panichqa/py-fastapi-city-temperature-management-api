@@ -18,8 +18,8 @@ def get_city(db: Session, city_id: int):
 def delete_city(db: Session, city_id: int):
     db_city = get_city(db, city_id)
     if db_city is None:
-        return None
+        return {"success": False, "message": f"City with ID {city_id} not found."}
 
     db.delete(db_city)
     db.commit()
-    return db_city
+    return {"success": True, "city": db_city}
